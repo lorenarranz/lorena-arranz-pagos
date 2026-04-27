@@ -1,0 +1,8 @@
+{
+  "name": "lorena-arranz-pagos",
+  "version": "1.0.0",
+  "description": "Backend de pagos para landing de cursos",
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
