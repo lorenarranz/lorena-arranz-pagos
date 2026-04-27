@@ -46,6 +46,10 @@ export default async function handler(req, res) {
         }
       }],
       mode: 'payment',
+      // Recoge teléfono
+      phone_number_collection: {
+        enabled: true
+      },
       // Datos extra que verás en tu panel de Stripe
       metadata: {
         ciudad,
@@ -54,8 +58,6 @@ export default async function handler(req, res) {
         plazas: String(plazas),
         neceser
       },
-      // Permite recoger email
-      customer_email: undefined,
       // Aplica cupón automático (si tienes el cupón configurado en Stripe se aplica solo)
       allow_promotion_codes: false,
       // Vuelve a tu landing tras pagar
