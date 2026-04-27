@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     }
 
     // Crear sesión de checkout EMBEBIDA
-    const session = await stripe.checkout.sessions.create({
+    const sessionConfig = {
       ui_mode: 'embedded',
       line_items: [{
         price: priceId,
@@ -58,11 +58,16 @@ export default async function handler(req, res) {
         plazas: String(plazas),
         neceser
       },
-      // Aplica cupón automático (si tienes el cupón configurado en Stripe se aplica solo)
-      allow_promotion_codes: false,
       // Vuelve a tu landing tras pagar
       return_url: `${req.headers.origin || 'https://lorenarranz.com'}/curso/gracias.html?session_id={CHECKOUT_SESSION_ID}`
-    });
+    };
+
+    // Aplicar cupón automático si son 4 plazas (–20€ total)
+    if (plazas === 4) {
+      sessionConfig.discounts = [{ coupon: 'DUkhi5xN' }];
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     res.status(200).json({ clientSecret: session.client_secret });
 
