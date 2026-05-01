@@ -2,7 +2,9 @@
   "name": "lorena-arranz-pagos",
   "version": "1.0.0",
   "description": "Backend de pagos para landing de cursos",
+  "type": "module",
   "dependencies": {
-    "stripe": "^17.0.0"
+    "stripe": "^17.0.0",
+    "resend": "^4.0.0"
   }
 }
